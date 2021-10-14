@@ -117,5 +117,15 @@ while (getline(poola, linee))
          }
     }
 ```
+## **Paleidimas**
+```
+gcc -lstdc++ \
+    -o TestChain \
+    -std=c++11 \
+    -stdlib=libc++ \
+    -x c++ \
+    Mano blockchain.cpp Block.cpp Blockchain.cpp SHAmano.h
+./TestChain
+```
 ___
 
