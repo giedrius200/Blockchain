@@ -1,6 +1,34 @@
 # Blockchain
 ## **Išvados**
 - [x] Balanso tikrinimas
+
+```
+while (getline(poola, linee))
+    {
+	poola >> hashasu >> siuntejasu >> gavejasu >> sumau;
+        auto it = std::find(vart.raktas.begin(), vart.raktas.end(), siuntejasu);
+        if (it != vart.raktas.end()) {
+            int index = it - vart.raktas.begin();
+            vart.balansas[index] = vart.balansas[index] - sumau;
+            if (vart.balansas[index] < 0) {
+                continue;
+            }
+            info = vart.vardai[index] + " " + to_string(vart.balansas[index]);
+            vart.info.push_back(info);
+        }
+        auto it1 = std::find(vart.raktas.begin(), vart.raktas.end(), gavejasu);
+        if (it1 != vart.raktas.end()) {
+            int index = it1 - vart.raktas.begin();
+            vart.balansas[index] = vart.balansas[index] + sumau;
+            if (vart.balansas[index] < 0) {
+                        continue;
+            }
+         info = vart.vardai[index] + " " + to_string(vart.balansas[index]);
+         vart.info.push_back(info);
+                i++;
+         }
+    }
+```
 - [x] Transakcijos hash'o tikrinimas
 - [x] Sugeneruoti ~1000 tinklo vartotojų
 - [x] Sugeneruoti ~10000 naujų, į jokį bloką dar neįdėtų, transakcijų pool'ą
