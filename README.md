@@ -9,14 +9,12 @@
 
 | Output |
 | ------------- |
-| 
-Mining block 1
+| Mining block 1
 Previous hash: 99NE4AASN0KEOP1I04SRIL6I63B8ESGDSS1rdbizlmxirozzuxsvzbyhceqafhwk
 Block mined: 091388dfb9r63n8d23qz8nldieSe684efmrnn89h35l3w7aia16d1rra4h6rznfy
 Sunkumas: 1
 Time: 1634189649
-POW - 1  
-|
+POW - 1  |
 
 - [x] OOP saugumo praktikos, bloko struktūra
 
