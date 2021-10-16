@@ -1,4 +1,4 @@
-# Blockchain
+# Blockchain v0.2
 ## **Išvados**
 
 - [x] Transakcijos hash'o tikrinimas
