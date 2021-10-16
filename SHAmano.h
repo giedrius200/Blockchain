@@ -40,6 +40,25 @@ std::string bitset_to_string(std::bitset<N> bits) {
 	return toReturn;
 }
 
+template< size_t size>
+typename std::bitset<size> random_bitset(double p = 0.5) {
+
+	typename std::bitset<size> bits;
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::bernoulli_distribution d(p);
+
+	double iSecret;
+
+	for (int n = 0; n < size; ++n) {
+		iSecret = rand() % 999901 + 100;
+		bits[n] = bits[n] + d(gen);
+	}
+
+	return bits;
+}
+
 #include <type_traits>
 
 bool is_emptyy(std::ifstream& pFile)
@@ -47,16 +66,15 @@ bool is_emptyy(std::ifstream& pFile)
 	return pFile.peek() == std::ifstream::traits_type::eof();
 }
 
-//template<typename T, typename P>
-//T remove_if(T beg, T end, P pred)
-//{
-//	T dest = beg;
-//	for (T itr = beg; itr != end; ++itr)
-//		if (!pred(*itr))
-//			*(dest++) = *itr;
-//	return dest;
-//}
-
+#include <regex>
+bool invalidChar(char c)
+{
+	return !(c >= 0 && c < 128);
+}
+void stripUnicode(string& str)
+{
+	str.erase(remove_if(str.begin(), str.end(), invalidChar), str.end());
+}
 string paverstihex(string& s)
 {
 	ostringstream ret;
@@ -69,28 +87,16 @@ string paverstihex(string& s)
 
 	string stringas = "kriptografija";
 
-	//string pridedass = stringas;
-
 	int bitai;
-	/*for (int i = 0; i < 64; i++) {
-		if (s.length() > 64) {
-			break;
-		}
-		s.append(pridedas);
-		stringas.append(pridedass);
-
-	}*/
 
 	int skaicius;
 
 	int dydis = s.length();
 
-	/*while (s.length() > stringas.length()) {
-
-		stringas.append(pridedass + s);
-
-	}*/
-	srand(time(0));
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(0, 10000000000000);
+	srand(dis(gen));
 	random_shuffle(s.begin(), s.end());
 	random_shuffle(stringas.begin(), stringas.end());
 
@@ -106,7 +112,7 @@ string paverstihex(string& s)
 		skaicius = rand() % 2 + 1;
 		bitset<8> bar(skaicius);
 		bitset<8> bs3(bs4 <<= skaicius & skaicius);
-		bitset<8> bs5(bs3 <<= skaicius );
+		bitset<8> bs5(bs3 <<= skaicius);
 		bitset<8> rez(bs5 ^= bar);
 
 		tuscia = bitset_to_string(rez);
@@ -116,33 +122,11 @@ string paverstihex(string& s)
 	s.append(stringas);
 	s.erase(remove(s.begin(), s.end(), ' '), s.end());
 	s.erase(std::remove(s.begin(), s.end(), '\n'), s.end());
-	//s.pop_back();
-	/*if (s.length() < 66) {
-		while (s.length() < 66) {
-			char cch = 'a' + rand() % 26;
-
-			s.push_back(cch);
-		}
-	}*/
 	if (s.length() > 64) {
 		while (s.length() != 64) {
 			s.pop_back();
 		}
 	}
-	/*static const char hex_skaiciai[] = "0123456789ABCDEF";
-
-	std::string output;
-	output.reserve(s.length() * 2);
-	for (unsigned char c : s)
-	{
-		output.push_back(hex_skaiciai[c >> 4]);
-		output.push_back(hex_skaiciai[c & 15]);
-	}
-	if (output.length() > 64) {
-		while (output.length() != 64) {
-			output.pop_back();
-		}
-	}*/
 	return s;
 }
 #endif

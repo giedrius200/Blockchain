@@ -12,11 +12,13 @@ public:
     Blockchain();
 
     void PridekBlock(Block bNew);
+    void data(Block bNew);
+    void MininkNonce(Block bNew,int limitas);
 
 private:
     uint32_t _nDifficulty;
+    int limitas;
     vector<Block> _vChain;
-
     Block _GetLastBlock() const;
 };
 
