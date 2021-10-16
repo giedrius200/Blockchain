@@ -16,6 +16,74 @@ Sunkumas: 1
 Time: 1634189649
 POW - 1  |
 
+- [x] Patobulintas blokų kasimo (mining) procesas pagal v0.2 logiką
+
+```
+void mininimas(Blockchain& chain1, int limitas)
+{
+    int blocou = 1;
+    int kiek = 1;
+    string info = "";
+    string bendrasinfo = "";
+    vector<int>skaiciai = { 1,2,3,4,5 };
+
+    string data;
+
+    string t;
+
+    int kiekdidinti;
+
+    int r;
+
+    while (!skaiciai.empty()) {
+            r = *select_randomly(skaiciai.begin(), skaiciai.end());
+
+            string blokoid = std::to_string(r) + "Bloko.txt";
+            ifstream bandym(blokoid);
+            skaiciai.erase(std::remove(skaiciai.begin(), skaiciai.end(), r), skaiciai.end());
+            while (getline(bandym, info)) {
+                bendrasinfo = bendrasinfo + info + "\n";
+            }
+
+            cout << "------------------------------------------------"<< endl;
+            cout << "Mining block " << blocou << endl;
+            chain1.MininkNonce(Block(blocou, bendrasinfo), limitas);
+
+            cout << endl;
+            cout << endl;
+
+            info = "";
+            bendrasinfo = "";
+            kiek++;
+
+            blocou++;
+
+            if (skaiciai.empty()) {
+                cout << "Ar norite padidinti bandymu kieki (true,false) ?" << endl;
+                cin >> t;
+
+                int laikin = limitas;
+
+                if (t == "true") {
+                    cout << "Iveskite kiek kartu norite padidinti " << endl;
+                    cin >> kiekdidinti;
+                    skaiciai.push_back(1);
+                    skaiciai.push_back(2);
+                    skaiciai.push_back(3);
+                    skaiciai.push_back(4);
+                    skaiciai.push_back(5);
+                    limitas = limitas * kiekdidinti;
+                    continue;
+                }
+                else { 
+                    break;
+                }
+
+            }
+    }
+
+}
+```
 - [x] OOP saugumo praktikos, bloko struktūra
 
 ```
