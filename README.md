@@ -124,7 +124,28 @@ private:
 - [x] Atnaujinta hash funkcija
 
 ```
-srand(time(0));
+string paverstihex(string& s)
+{
+	ostringstream ret;
+
+	string pridedas = "";
+	string simbolis = "";
+	string tuscia = "";
+
+	char simbolisc;
+
+	string stringas = "kriptografija";
+
+	int bitai;
+
+	int skaicius;
+
+	int dydis = s.length();
+
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(0, 10000000000000);
+	srand(dis(gen));
 	random_shuffle(s.begin(), s.end());
 	random_shuffle(stringas.begin(), stringas.end());
 
@@ -140,7 +161,7 @@ srand(time(0));
 		skaicius = rand() % 2 + 1;
 		bitset<8> bar(skaicius);
 		bitset<8> bs3(bs4 <<= skaicius & skaicius);
-		bitset<8> bs5(bs3 <<= skaicius );
+		bitset<8> bs5(bs3 <<= skaicius);
 		bitset<8> rez(bs5 ^= bar);
 
 		tuscia = bitset_to_string(rez);
@@ -155,6 +176,9 @@ srand(time(0));
 			s.pop_back();
 		}
 	}
+	return s;
+}
+
 ```
 - [x] Balanso tikrinimas
 
