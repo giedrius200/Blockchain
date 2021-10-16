@@ -13,8 +13,36 @@ Sunkumas: 1
 Time: 1634189649
 POW - 1  |
 
-- [x] OOP saugumo praktikos, bloko struktūra
+- [x] Patobulinta logika v0.1 versijai
 
+```
+void blokukurimas(Blockchain& chain1, vector<string>& text_file) {
+    string transakcijoss = "";
+    int kiek = 1;
+    string blokoid = std::to_string(kiek) + "Bloko.txt";
+
+    ofstream block(blokoid);
+
+    int kiekei = 1;
+    int blocou = 1;
+    for (auto i : text_file) {
+        block << i << endl;
+        transakcijoss = transakcijoss + i + "\n";
+        if (kiekei == 100) {
+            cout << "Mining block " << blocou << endl;
+            chain1.PridekBlock(Block(blocou, transakcijoss));
+            block.close();
+            blokoid = std::to_string(blocou + 1) + "Bloko.txt";
+            block.open(blokoid);
+            blocou++;
+            kiekei = 1;
+            continue;
+        }
+        kiekei++;
+    }
+}
+```
+- [x] OOP saugumo praktikos, bloko struktūra
 ```
 class Block {
 public:
